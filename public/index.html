@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ha">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HausaSmart</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div>
+      <h1>HausaSmart</h1>
+      <p>A smart Hausa language app</p>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HOME -->
+    <section id="home" class="page active">
+      <h2>Assalamu alaikum Ahmed! 👋</h2>
+      <p class="muted">Me kake son yi a yau?</p>
+
+      <div class="grid">
+        <button onclick="showPage('ai')">🤖<br>AI Assistant</button>
+        <button onclick="showPage('jobs')">💼<br>Jobs</button>
+        <button onclick="showPage('cv')">📄<br>CV Builder</button>
+        <button onclick="showPage('social')">📱<br>Social Media</button>
+        <button onclick="showPage('translator')">🌐<br>Translator</button>
+        <button onclick="showPage('scam')">🛡️<br>Scam Checker</button>
+      </div>
+    </section>
+
+    <!-- AI -->
+    <section id="ai" class="page">
+      <h2>🤖 HausaSmart AI</h2>
+      <p>Ni ne HausaSmart AI. Me zan taimaka maka da shi?</p>
+
+      <div id="chatBox" class="chat-box">
+        <div class="bot">Sannu! Ka rubuta tambayarka a ƙasa.</div>
+      </div>
+
+      <div class="input-row">
+        <input id="aiInput" placeholder="Rubuta tambaya...">
+        <button onclick="sendAI()">Aika</button>
+      </div>
+    </section>
+
+    <!-- JOBS -->
+    <section id="jobs" class="page">
+      <h2>💼 Jobs</h2>
+      <p class="muted">Nemo ayyukan da suka dace da kai.</p>
+
+      <div class="card">
+        <h3>Virtual Assistant</h3>
+        <p>Remote • Demo listing</p>
+        <button>View Job</button>
+      </div>
+
+      <div class="card">
+        <h3>Data Entry</h3>
+        <p>Remote • Demo listing</p>
+        <button>View Job</button>
+      </div>
+
+      <div class="card">
+        <h3>Customer Support</h3>
+        <p>Remote • Demo listing</p>
+        <button>View Job</button>
+      </div>
+    </section>
+
+    <!-- CV -->
+    <section id="cv" class="page">
+      <h2>📄 CV Builder</h2>
+
+      <input id="cvName" placeholder="Cikakken Suna">
+      <input id="cvPhone" placeholder="Lambar waya">
+      <input id="cvEmail" placeholder="Email">
+      <input id="cvAddress" placeholder="Adireshi">
+      <input id="cvJob" placeholder="Taken aikin da kake nema">
+
+      <button class="full" onclick="generateCV()">Create CV</button>
+
+      <div id="cvPreview" class="card"></div>
+    </section>
+
+    <!-- SOCIAL -->
+    <section id="social" class="page">
+      <h2>📱 Social Media Tools</h2>
+
+      <div class="grid">
+        <button onclick="socialTool('caption')">Caption Generator</button>
+        <button onclick="socialTool('hook')">Hook Generator</button>
+        <button onclick="socialTool('hashtags')">Hashtag Ideas</button>
+        <button onclick="socialTool('tiktok')">TikTok Ideas</button>
+        <button onclick="socialTool('facebook')">Facebook Post</button>
+        <button onclick="socialTool('youtube')">YouTube Titles</button>
+      </div>
+
+      <div id="socialResult" class="card"></div>
+    </section>
+
+    <!-- TRANSLATOR -->
+    <section id="translator" class="page">
+      <h2>🌐 Translator</h2>
+
+      <textarea id="translateInput" placeholder="Rubuta Hausa ko English..."></textarea>
+
+      <button class="full" onclick="translateText()">Translate</button>
+
+      <div id="translateResult" class="card"></div>
+    </section>
+
+    <!-- SCAM -->
+    <section id="scam" class="page">
+      <h2>🛡️ Scam Checker</h2>
+
+      <textarea id="scamInput" placeholder="Manna saƙon da kake zargin scam..."></textarea>
+
+      <button class="full" onclick="checkScam()">Check Message</button>
+
+      <div id="scamResult" class="card"></div>
+    </section>
+
+    <!-- PROFILE -->
+    <section id="profile" class="page">
+      <h2>👤 Profile</h2>
+
+      <div class="card">
+        <h3>Ahmed Abubakar</h3>
+        <p>HausaSmart User</p>
+      </div>
+
+      <div class="card">📄 CVs nawa</div>
+      <div class="card">💼 Ayyukan da na ajiye</div>
+      <div class="card">🎓 Courses nawa</div>
+      <div class="card">🏆 Certificates</div>
+      <div class="card">💬 Saved AI Chats</div>
+      <div class="card">⚙️ Settings</div>
+    </section>
+
+  </main>
+
+  <nav class="bottom-nav">
+    <button onclick="showPage('home')">🏠<span>Home</span></button>
+    <button onclick="showPage('jobs')">💼<span>Jobs</span></button>
+    <button onclick="showPage('ai')">🤖<span>AI</span></button>
+    <button onclick="showPage('cv')">📄<span>CV</span></button>
+    <button onclick="showPage('profile')">👤<span>Profile</span></button>
+  </nav>
+
+  <script src="/app.js"></script>
+</body>
+</html>
