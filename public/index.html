@@ -82,9 +82,17 @@
       <input id="cvAddress" placeholder="Adireshi">
       <input id="cvJob" placeholder="Taken aikin da kake nema">
 
+      <textarea id="cvObjective" placeholder="Career Objective"></textarea>
+      <textarea id="cvEducation" placeholder="Education"></textarea>
+      <textarea id="cvExperience" placeholder="Work Experience"></textarea>
+      <textarea id="cvSkills" placeholder="Skills"></textarea>
+      <textarea id="cvCertificates" placeholder="Certificates"></textarea>
+
       <button class="full" onclick="generateCV()">Create CV</button>
 
       <div id="cvPreview" class="card"></div>
+
+      <button class="full" onclick="window.print()">Print / Save CV</button>
     </section>
 
     <!-- SOCIAL -->
@@ -114,7 +122,7 @@
       <div id="translateResult" class="card"></div>
     </section>
 
-    <!-- SCAM -->
+    <!-- SCAM CHECKER -->
     <section id="scam" class="page">
       <h2>🛡️ Scam Checker</h2>
 
@@ -144,6 +152,7 @@
 
   </main>
 
+  <!-- BOTTOM NAVIGATION -->
   <nav class="bottom-nav">
     <button onclick="showPage('home')">🏠<span>Home</span></button>
     <button onclick="showPage('jobs')">💼<span>Jobs</span></button>
