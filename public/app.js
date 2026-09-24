@@ -11,6 +11,7 @@ function showPage(pageId) {
   }
 }
 
+
 // =========================
 // HAUSASMART AI
 // =========================
@@ -93,6 +94,21 @@ function generateCV() {
   const address = document.getElementById("cvAddress").value.trim();
   const job = document.getElementById("cvJob").value.trim();
 
+  const objective =
+    document.getElementById("cvObjective").value.trim();
+
+  const education =
+    document.getElementById("cvEducation").value.trim();
+
+  const experience =
+    document.getElementById("cvExperience").value.trim();
+
+  const skills =
+    document.getElementById("cvSkills").value.trim();
+
+  const certificates =
+    document.getElementById("cvCertificates").value.trim();
+
   if (!name) {
     alert("Da fatan saka cikakken suna.");
     return;
@@ -100,37 +116,82 @@ function generateCV() {
 
   const preview = document.getElementById("cvPreview");
 
+  const skillsList = skills
+    ? skills
+        .split(",")
+        .map(skill => `<li>${escapeHTML(skill.trim())}</li>`)
+        .join("")
+    : `
+        <li>Communication</li>
+        <li>Time Management</li>
+        <li>Computer Skills</li>
+        <li>Teamwork</li>
+      `;
+
   preview.innerHTML = `
-    <h2>${escapeHTML(name)}</h2>
+    <div class="cv-document">
 
-    <p>
-      ${escapeHTML(phone)}
-      ${phone && email ? " • " : ""}
-      ${escapeHTML(email)}
-    </p>
+      <h2>${escapeHTML(name)}</h2>
 
-    <p>${escapeHTML(address)}</p>
+      <p>
+        ${escapeHTML(phone)}
+        ${phone && email ? " • " : ""}
+        ${escapeHTML(email)}
+      </p>
 
-    <hr>
+      <p>${escapeHTML(address)}</p>
 
-    <h3>Career Objective</h3>
-    <p>
-      Seeking a ${escapeHTML(job || "suitable position")}
-      where I can use my skills and contribute positively to the organization.
-    </p>
+      <hr>
 
-    <h3>Skills</h3>
-    <ul>
-      <li>Communication</li>
-      <li>Time Management</li>
-      <li>Computer Skills</li>
-      <li>Teamwork</li>
-    </ul>
+      <h3>Career Objective</h3>
+      <p>
+        ${
+          escapeHTML(
+            objective ||
+            `Seeking a ${job || "suitable position"} where I can use my skills and contribute positively to the organization.`
+          )
+        }
+      </p>
 
-    <br>
+      ${
+        education
+          ? `
+            <h3>Education</h3>
+            <p>${formatText(education)}</p>
+          `
+          : ""
+      }
 
-    <button onclick="window.print()">Print / Save CV</button>
+      ${
+        experience
+          ? `
+            <h3>Work Experience</h3>
+            <p>${formatText(experience)}</p>
+          `
+          : ""
+      }
+
+      <h3>Skills</h3>
+      <ul>
+        ${skillsList}
+      </ul>
+
+      ${
+        certificates
+          ? `
+            <h3>Certificates</h3>
+            <p>${formatText(certificates)}</p>
+          `
+          : ""
+      }
+
+    </div>
   `;
+
+  preview.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
 }
 
 
@@ -143,51 +204,41 @@ function socialTool(type) {
 
   const ideas = {
     caption: `
-      <h3>Caption Generator</h3>
-      <p>✨ Sabuwar rana, sabuwar dama. Ka ci gaba da ƙoƙari.</p>
+      <h3>✍️ Caption Generator</h3>
+      <p>Rayuwa tana buƙatar haƙuri, aiki tuƙuru da kuma dogaro ga Allah. 💚</p>
     `,
 
     hook: `
-      <h3>Hook Generator</h3>
-      <p>🔥 “Kada ka wuce kafin ka ga abin da zan nuna maka...”</p>
+      <h3>🔥 Hook Generator</h3>
+      <p>“Kada ka wuce wannan bidiyon kafin ka san wannan sirrin...”</p>
     `,
 
     hashtags: `
-      <h3>Hashtag Ideas</h3>
-      <p>#HausaSmart #Hausa #Nigeria #TikTokNigeria #LearnHausa</p>
+      <h3>#️⃣ Hashtag Ideas</h3>
+      <p>#HausaSmart #Hausa #Nigeria #TikTokNigeria #LearnHausa #Motivation</p>
     `,
 
     tiktok: `
-      <h3>TikTok Ideas</h3>
-      <ol>
-        <li>Darasin Turanci cikin Hausa</li>
-        <li>HausaSmart AI tips</li>
-        <li>Abubuwan da matasa za su koya</li>
-        <li>Short Hausa motivation</li>
-        <li>Tech tips cikin Hausa</li>
-      </ol>
+      <h3>📱 TikTok Ideas</h3>
+      <p>1. Koyar da kalmar Hausa guda 5 a rana.</p>
+      <p>2. Fassarar Hausa zuwa English.</p>
+      <p>3. Tips na neman aiki.</p>
     `,
 
     facebook: `
-      <h3>Facebook Post</h3>
-      <p>
-        Kana neman sabuwar hanya ta koyon abubuwa cikin Hausa?
-        HausaSmart na taimaka maka ka koyi, ka rubuta,
-        ka fassara kuma ka shirya abubuwa cikin sauƙi.
-      </p>
+      <h3>📘 Facebook Post</h3>
+      <p>Assalamu alaikum! 🙌 HausaSmart na taimaka maka wajen Hausa, CV, jobs, translation da sauran abubuwa.</p>
     `,
 
     youtube: `
-      <h3>YouTube Titles</h3>
-      <ol>
-        <li>Yadda AI zai taimaka maka cikin Hausa</li>
-        <li>Abubuwa 5 da za ka iya yi da AI</li>
-        <li>HausaSmart: Sabuwar hanyar koyon fasaha</li>
-      </ol>
+      <h3>▶️ YouTube Titles</h3>
+      <p>“Yadda HausaSmart Zai Taimaka Maka Neman Aiki a 2026”</p>
     `
   };
 
-  result.innerHTML = ideas[type] || "<p>Babu result.</p>";
+  result.innerHTML =
+    ideas[type] ||
+    "<p>Babu wannan tool ɗin yanzu.</p>";
 }
 
 
@@ -206,7 +257,7 @@ async function translateText() {
     return;
   }
 
-  result.innerHTML = "<p>Ana fassara... ⏳</p>";
+  result.innerHTML = "<p>Ana fassara... 🌐</p>";
 
   try {
     const response = await fetch("/api/chat", {
@@ -216,7 +267,7 @@ async function translateText() {
       },
       body: JSON.stringify({
         message:
-          "Translate this text accurately. If it is Hausa, translate to English. If it is English, translate to Hausa. Give only the translation:\n\n" +
+          "Translate this text between Hausa and English. If it is Hausa, translate to clear English. If it is English, translate to natural Hausa. Return only the translation:\n\n" +
           text
       })
     });
@@ -225,11 +276,13 @@ async function translateText() {
 
     if (data.success) {
       result.innerHTML = `
-        <h3>Fassara</h3>
+        <h3>🌐 Fassara</h3>
         <p>${escapeHTML(data.answer)}</p>
       `;
     } else {
-      result.innerHTML = `<p>⚠️ ${escapeHTML(data.error)}</p>`;
+      result.innerHTML = `
+        <p>⚠️ ${escapeHTML(data.error || "An samu matsala.")}</p>
+      `;
     }
 
   } catch (error) {
@@ -250,7 +303,8 @@ async function checkScam() {
   const message = input.value.trim();
 
   if (!message) {
-    result.innerHTML = "<p>Manna saƙon da kake son bincikawa.</p>";
+    result.innerHTML =
+      "<p>Manna saƙon da kake son bincikawa.</p>";
     return;
   }
 
@@ -277,13 +331,25 @@ async function checkScam() {
         <p>${escapeHTML(data.answer)}</p>
       `;
     } else {
-      result.innerHTML = `<p>⚠️ ${escapeHTML(data.error)}</p>`;
+      result.innerHTML = `
+        <p>⚠️ ${escapeHTML(data.error || "An samu matsala.")}</p>
+      `;
     }
 
   } catch (error) {
     result.innerHTML =
       "<p>⚠️ An samu matsala wajen binciken saƙon.</p>";
   }
+}
+
+
+// =========================
+// TEXT FORMAT
+// =========================
+
+function formatText(value) {
+  return escapeHTML(value)
+    .replace(/\n/g, "<br>");
 }
 
 
