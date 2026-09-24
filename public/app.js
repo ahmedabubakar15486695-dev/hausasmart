@@ -11,7 +11,12 @@ function showPage(pageId) {
   }
 }
 
-function sendAI() {
+
+// =========================
+// HAUSASMART AI
+// =========================
+
+async function sendAI() {
   const input = document.getElementById("aiInput");
   const chatBox = document.getElementById("chatBox");
 
@@ -27,12 +32,66 @@ function sendAI() {
 
   input.value = "";
 
-  chatBox.innerHTML += `
-    <div class="bot">Ana tunani... ⏳</div>
-  `;
+  const thinking = document.createElement("div");
+  thinking.className = "bot";
+  thinking.id = "thinking";
+  thinking.textContent = "Ana tunani... ⏳";
+
+  chatBox.appendChild(thinking);
+  chatBox.scrollTop = chatBox.scrollHeight;
+
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: message
+      })
+    });
+
+    const data = await response.json();
+
+    if (thinking) {
+      thinking.remove();
+    }
+
+    if (data.success) {
+      chatBox.innerHTML += `
+        <div class="bot">
+          ${escapeHTML(data.answer)}
+        </div>
+      `;
+    } else {
+      chatBox.innerHTML += `
+        <div class="bot">
+          ⚠️ ${escapeHTML(
+            data.error || "An samu matsala wajen haɗawa da AI."
+          )}
+        </div>
+      `;
+    }
+
+  } catch (error) {
+    if (thinking) {
+      thinking.remove();
+    }
+
+    chatBox.innerHTML += `
+      <div class="bot">
+        ⚠️ AI bai dawo da amsa ba. Da fatan sake gwadawa.
+      </div>
+    `;
+  }
 
   chatBox.scrollTop = chatBox.scrollHeight;
 }
+
+
+// =========================
+// PROFESSIONAL CV BUILDER
+// =========================
 
 function generateCV() {
   const name = getValue("cvName");
@@ -86,13 +145,19 @@ function generateCV() {
 
       <h2>${escapeHTML(name)}</h2>
 
-      <p><strong>${escapeHTML(finalJob)}</strong></p>
+      <p>
+        <strong>${escapeHTML(finalJob)}</strong>
+      </p>
 
       <p>
         ${escapeHTML(phone)}
         ${phone && email ? " • " : ""}
         ${escapeHTML(email)}
-        ${address ? `<br>${escapeHTML(address)}` : ""}
+        ${
+          address
+            ? `<br>${escapeHTML(address)}`
+            : ""
+        }
       </p>
 
       <hr>
@@ -165,25 +230,48 @@ function generateCV() {
   });
 }
 
+
+// =========================
+// SOCIAL MEDIA TOOLS
+// =========================
+
 function socialTool(type) {
   const result = document.getElementById("socialResult");
 
   if (!result) return;
 
   const ideas = {
-    caption: "Rayuwa tana buƙatar haƙuri, aiki tuƙuru da dogaro ga Allah. 💚",
-    hook: "Kada ka wuce wannan bidiyon kafin ka san wannan sirrin...",
-    hashtags: "#HausaSmart #Hausa #Nigeria #TikTokNigeria",
-    tiktok: "Koyar da kalmar Hausa guda 5 a rana.",
-    facebook: "Assalamu alaikum! HausaSmart na taimaka maka da Hausa, CV, jobs da translation.",
-    youtube: "Yadda HausaSmart Zai Taimaka Maka Neman Aiki"
+    caption:
+      "Rayuwa tana buƙatar haƙuri, aiki tuƙuru da dogaro ga Allah. 💚",
+
+    hook:
+      "Kada ka wuce wannan bidiyon kafin ka san wannan sirrin...",
+
+    hashtags:
+      "#HausaSmart #Hausa #Nigeria #TikTokNigeria #LearnHausa",
+
+    tiktok:
+      "Koyar da kalmar Hausa guda 5 a rana.",
+
+    facebook:
+      "Assalamu alaikum! HausaSmart na taimaka maka da Hausa, CV, jobs da translation.",
+
+    youtube:
+      "Yadda HausaSmart Zai Taimaka Maka Neman Aiki"
   };
 
   result.innerHTML = `
     <h3>Result</h3>
-    <p>${escapeHTML(ideas[type] || "Babu wannan tool ɗin yanzu.")}</p>
+    <p>${escapeHTML(
+      ideas[type] || "Babu wannan tool ɗin yanzu."
+    )}</p>
   `;
 }
+
+
+// =========================
+// TRANSLATOR
+// =========================
 
 async function translateText() {
   const input = document.getElementById("translateInput");
@@ -194,11 +282,13 @@ async function translateText() {
   const text = input.value.trim();
 
   if (!text) {
-    result.innerHTML = "<p>Rubuta abin da kake son fassarawa.</p>";
+    result.innerHTML =
+      "<p>Rubuta abin da kake son fassarawa.</p>";
     return;
   }
 
-  result.innerHTML = "<p>Ana fassara... 🌐</p>";
+  result.innerHTML =
+    "<p>Ana fassara... 🌐</p>";
 
   try {
     const response = await fetch("/api/chat", {
@@ -208,7 +298,7 @@ async function translateText() {
       },
       body: JSON.stringify({
         message:
-          "Translate this text between Hausa and English. Return only the translation:\n\n" +
+          "Translate this text between Hausa and English. If it is Hausa, translate it to clear English. If it is English, translate it to natural Hausa. Return only the translation:\n\n" +
           text
       })
     });
@@ -222,7 +312,11 @@ async function translateText() {
       `;
     } else {
       result.innerHTML = `
-        <p>⚠️ ${escapeHTML(data.error || "An samu matsala.")}</p>
+        <p>
+          ⚠️ ${escapeHTML(
+            data.error || "An samu matsala."
+          )}
+        </p>
       `;
     }
 
@@ -231,6 +325,11 @@ async function translateText() {
       "<p>⚠️ An samu matsala wajen fassara.</p>";
   }
 }
+
+
+// =========================
+// SCAM CHECKER
+// =========================
 
 async function checkScam() {
   const input = document.getElementById("scamInput");
@@ -257,7 +356,7 @@ async function checkScam() {
       },
       body: JSON.stringify({
         message:
-          "Analyze this message for possible scam warning signs. Explain clearly in simple Hausa:\n\n" +
+          "Analyze this message for possible scam warning signs. Explain clearly in simple Hausa. Do not claim certainty if there is not enough evidence:\n\n" +
           message
       })
     });
@@ -271,7 +370,11 @@ async function checkScam() {
       `;
     } else {
       result.innerHTML = `
-        <p>⚠️ ${escapeHTML(data.error || "An samu matsala.")}</p>
+        <p>
+          ⚠️ ${escapeHTML(
+            data.error || "An samu matsala."
+          )}
+        </p>
       `;
     }
 
@@ -281,6 +384,11 @@ async function checkScam() {
   }
 }
 
+
+// =========================
+// HELPERS
+// =========================
+
 function getValue(id) {
   const element = document.getElementById(id);
 
@@ -289,9 +397,12 @@ function getValue(id) {
   return element.value.trim();
 }
 
+
 function formatText(value) {
-  return escapeHTML(value).replace(/\n/g, "<br>");
+  return escapeHTML(value)
+    .replace(/\n/g, "<br>");
 }
+
 
 function escapeHTML(value) {
   return String(value)
@@ -302,14 +413,26 @@ function escapeHTML(value) {
     .replaceAll("'", "&#039;");
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const input = document.getElementById("aiInput");
 
-  if (input) {
-    input.addEventListener("keydown", event => {
-      if (event.key === "Enter") {
-        sendAI();
-      }
-    });
+// =========================
+// ENTER KEY FOR AI
+// =========================
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+    const input =
+      document.getElementById("aiInput");
+
+    if (input) {
+      input.addEventListener(
+        "keydown",
+        event => {
+          if (event.key === "Enter") {
+            sendAI();
+          }
+        }
+      );
+    }
   }
-});
+);
