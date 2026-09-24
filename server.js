@@ -51,8 +51,9 @@ app.post("/api/chat", async (req, res) => {
         "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
       },
       body: JSON.stringify({
-        model: process.env.OPENAI_MODEL,
-        instructions:
+        model: "gpt-5.6-luna",
+instructions:
+    
           "You are HausaSmart AI. Reply in simple, respectful Hausa when the user writes Hausa. If the user writes English, reply in clear English or Hausa as appropriate. Help with CVs, jobs, social media, translation, learning skills and everyday questions. Never invent job vacancies, companies or facts. Be helpful and concise.",
         input: message.trim()
       })
