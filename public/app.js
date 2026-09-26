@@ -117,6 +117,12 @@ function generateCV() {
 
   const finalJob = job || "Heavy-Duty Truck Driver";
 
+const professionalSummary =
+  "Experienced and responsible Heavy-Duty Truck Driver with practical experience in long-distance transportation, vehicle inspection and road safety. Committed to safe driving, punctuality, proper vehicle care and professional conduct.";
+
+const careerObjective =
+  "To obtain a Heavy-Duty Truck Driver position where I can apply my driving experience, road safety knowledge and vehicle-handling skills to support the organization and deliver reliable transportation services.";
+
   let skillsHTML = "";
 
   if (skills) {
