@@ -171,18 +171,14 @@ const careerObjective =
       <h3>Professional Summary</h3>
 
       <p>
-        Reliable and responsible ${escapeHTML(finalJob)}
-        with commitment to road safety, vehicle care,
-        punctuality and professional conduct.
+       ${escapeHTML(professionalSummary)}
       </p>
 
       <h3>Career Objective</h3>
 
       <p>
-        Seeking a ${escapeHTML(finalJob)} position where
-        I can use my driving skills, experience and dedication
-        to contribute positively to the organization.
-      </p>
+  ${escapeHTML(careerObjective)}
+</p>
 
       ${
         experience
