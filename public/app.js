@@ -180,13 +180,16 @@ const careerObjective =
   ${escapeHTML(careerObjective)}
 </p>
 
-      ${
-        experience
-          ? `
-            <h3>Work Experience</h3>
-            <p>${formatText(experience)}</p>
-          `
-          : ""
+     <h3>Work Experience</h3>
+
+<p> 
+  ${
+    experience
+      ? formatText(experience)
+      : "Experienced in safe vehicle operation, long-distance transportation, vehicle inspection and responsible delivery of goods while maintaining road safety and professional conduct."
+  }
+</p>  
+    
       }
 
       ${
@@ -214,7 +217,7 @@ const careerObjective =
       }
 
       <h3>References</h3>
-
+      
       <p>
         ${
           references
