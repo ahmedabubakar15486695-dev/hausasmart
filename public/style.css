@@ -67,9 +67,12 @@ h3 {
   border: none;
   border-radius: 14px;
   background: white;
+  color: #115e59;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
   font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
+  line-height: 1.5;
 }
 
 .grid button:hover {
