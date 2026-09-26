@@ -190,7 +190,7 @@ const careerObjective =
   }
 </p>  
     
-      }
+    
 
       ${
         education
