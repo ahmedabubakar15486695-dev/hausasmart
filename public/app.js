@@ -441,3 +441,18 @@ document.addEventListener(
     }
   }
 );
+function showPremium() {
+  const modal = document.getElementById("premiumModal");
+
+  if (modal) {
+    modal.style.display = "flex";
+  }
+}
+
+function closePremium() {
+  const modal = document.getElementById("premiumModal");
+
+  if (modal) {
+    modal.style.display = "none";
+  }
+}
