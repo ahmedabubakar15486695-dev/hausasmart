@@ -329,3 +329,83 @@ button:active {
     display: none !important;
   }
 }
+/* =========================
+   PREMIUM
+========================= */
+
+.premium-card {
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 16px;
+  background: #0f766e;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.premium-card h2 {
+  margin-top: 0;
+}
+
+.premium-card button,
+.premium-button {
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.premium-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 9999;
+}
+
+.premium-box {
+  background: white;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 18px;
+  padding: 24px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.close-btn {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.plan {
+  padding: 15px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+
+.plan strong,
+.plan span {
+  display: block;
+}
+
+.plan span {
+  margin-top: 5px;
+  color: #666;
+}
+
+.premium-button {
+  width: 100%;
+  margin-top: 15px;
+  background: #0f766e;
+  color: white;
+}
